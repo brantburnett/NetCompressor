@@ -54,6 +54,14 @@ Prerequisites
 1. Visual Studio 2008
 2. Java Runtime Environment <http://java.com>
 
+Known Issues
+-------------
+
+If you are using the Visual Studio publishing feature, you must be sure to Show All Files in
+your solution explorer prior to performing the publish.  If you don't, Visual Studio will not
+publish the minified versions of your files.  If anyone knows a way to get around this
+issue in Visual Studio, please let me know.
+
 Bug Reporting
 --------------
 
