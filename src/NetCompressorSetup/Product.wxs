@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?include Definitions.wxi?>
+<?include Version.wxi?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="NetCompressor $(var.Version)" Language="1033"
+           Version="$(var.Version)" Manufacturer="Brant Burnett" UpgradeCode="7e2eb333-2ec0-43eb-9f3a-acd88b6dac86">
+    <Package InstallerVersion="301" Compressed="yes" InstallScope="perMachine" Platform="x86" Languages="1033" SummaryCodepage="1252" ShortNames="yes"
+             Manufacturer="Brant Burnett" Description="NetCompressor" InstallPrivileges="elevated" />
+
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" CompressionLevel="high" />
+
+    <!-- Upgrade -->
+    <Upgrade Id="7e2eb333-2ec0-43eb-9f3a-acd88b6dac86">
+      <UpgradeVersion Maximum="$(var.Version)" Property="VERSIONUPGRADE" MigrateFeatures="yes" />
+    </Upgrade>
+
+    <!-- Out of order detection -->
+    <Upgrade Id="7e2eb333-2ec0-43eb-9f3a-acd88b6dac86">
+      <UpgradeVersion Minimum="$(var.Version)" OnlyDetect="yes" Property="NEWERVERSIONDETECTED" />
+    </Upgrade>
+    <Condition Message="A more recent version of NetCompressor is already installed. Setup will now exit.">
+      NOT NEWERVERSIONDETECTED OR Installed
+    </Condition>
+
+    <!-- Install Sequence -->
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+    </InstallExecuteSequence>
+
+    <!-- Validate .NET Framework -->
+    <PropertyRef Id="NETFRAMEWORK35_SP_LEVEL"/>
+    <Condition Message="NetCompressor requires that the Microsoft .NET Framework 3.5 Service Pack 1 be installed.  Please download this package from Microsoft before continuing.">
+      <![CDATA[Installed OR (NETFRAMEWORK35_SP_LEVEL AND NETFRAMEWORK35_SP_LEVEL >= "#1")]]>
+    </Condition>
+
+    <!-- Other Properies -->
+    <Icon Id="NetCompressor.ico" SourceFile="..\NetCompressor.ico" />
+    <Property Id="ARPPRODUCTICON" Value="NetCompressor.ico" />
+    <Property Id="INSTALLLEVEL" Value="1" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLLOCATION" Name="NetCompressor">
+          <Component Id="compiler.jar" Guid="5188645E-8EE4-4bf8-8D1B-4F474518511F">
+            <File Source="$(var.SourceDir)\compiler.jar" KeyPath="yes" Vital="yes" />
+          </Component>
+
+          <Component Id="yuicompressor.jar" Guid="CEEEF9BD-B24E-41a4-8520-1AFEAFFF93AB">
+            <File Source="$(var.SourceDir)\yuicompressor-2.4.2.jar" KeyPath="yes" Vital="yes" />
+          </Component>
+          
+          <Component Id="LICENSE.txt" Guid="3B6E7A35-0A4B-4466-980D-3619350D064C">
+            <File Source="../LICENSE.txt" KeyPath="yes" />
+
+            <RegistryKey Action="create" Root="HKLM" Key="SOFTWARE\Microsoft\VisualStudio\9.0\Generators">
+              <RegistryKey Action="create" Key="{164B10B9-B200-11D0-8C61-00A0C91E29D5}">
+                <RegistryKey Action="createAndRemoveOnUninstall" Key="NetCompressorCSS">
+                  <RegistryValue Type="string" Value="NetCompressorCSS" />
+                  <RegistryValue Name="CLSID" Type="string" Value="{E5D686A7-BDA1-4c76-848D-553DAC4B579D}" />
+                  <RegistryValue Name="GeneratesDesignTimeSource" Type="integer" Value="1" />
+                </RegistryKey>
+                <RegistryKey Action="createAndRemoveOnUninstall" Key="NetCompressorJS">
+                  <RegistryValue Type="string" Value="NetCompressorJS" />
+                  <RegistryValue Name="CLSID" Type="string" Value="{1D0FBB22-8E5A-4ec5-B4DA-97E4CE017B1B}" />
+                  <RegistryValue Name="GeneratesDesignTimeSource" Type="integer" Value="1" />
+                </RegistryKey>
+              </RegistryKey>
+
+              <RegistryKey Action="create" Key="{E6FDF8B0-F3D1-11D4-8576-0002A516ECE8}">
+                <RegistryKey Action="createAndRemoveOnUninstall" Key="NetCompressorCSS">
+                  <RegistryValue Type="string" Value="NetCompressorCSS" />
+                  <RegistryValue Name="CLSID" Type="string" Value="{E5D686A7-BDA1-4c76-848D-553DAC4B579D}" />
+                  <RegistryValue Name="GeneratesDesignTimeSource" Type="integer" Value="1" />
+                </RegistryKey>
+                <RegistryKey Action="createAndRemoveOnUninstall" Key="NetCompressorJS">
+                  <RegistryValue Type="string" Value="NetCompressorJS" />
+                  <RegistryValue Name="CLSID" Type="string" Value="{1D0FBB22-8E5A-4ec5-B4DA-97E4CE017B1B}" />
+                  <RegistryValue Name="GeneratesDesignTimeSource" Type="integer" Value="1" />
+                </RegistryKey>
+              </RegistryKey>
+
+              <RegistryKey Action="create" Key="{FAE04EC1-301F-11d3-BF4B-00C04F79EFBC}">
+                <RegistryKey Action="createAndRemoveOnUninstall" Key="NetCompressorCSS">
+                  <RegistryValue Type="string" Value="NetCompressorCSS" />
+                  <RegistryValue Name="CLSID" Type="string" Value="{E5D686A7-BDA1-4c76-848D-553DAC4B579D}" />
+                  <RegistryValue Name="GeneratesDesignTimeSource" Type="integer" Value="1" />
+                </RegistryKey>
+                <RegistryKey Action="createAndRemoveOnUninstall" Key="NetCompressorJS">
+                  <RegistryValue Type="string" Value="NetCompressorJS" />
+                  <RegistryValue Name="CLSID" Type="string" Value="{1D0FBB22-8E5A-4ec5-B4DA-97E4CE017B1B}" />
+                  <RegistryValue Name="GeneratesDesignTimeSource" Type="integer" Value="1" />
+                </RegistryKey>
+              </RegistryKey>
+            </RegistryKey>
+          </Component>
+
+          <Component Id="ClosureLicense.txt" Guid="CA398ECF-E69F-4d44-994A-6357802A8091">
+            <File Source="..\ClosureLicense.txt" KeyPath="yes" />
+          </Component>
+
+          <Component Id="YUILicense.txt" Guid="A04DDB45-9457-49f6-BB54-D5B0894CF97C">
+            <File Source="..\YUILicense.txt" KeyPath="yes" />
+          </Component>
+
+          <Component Id="README.txt" Guid="E95E6170-4EE8-4cd6-8353-0D46747F6184">
+            <File Source="../../README.txt"  KeyPath="yes" />
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="NetCompressor" Title="NetCompressor" Level="1" AllowAdvertise="no">
+      <ComponentRef Id="NetCompressor.dll" Primary="yes" />
+      <ComponentRef Id="compiler.jar" />
+      <ComponentRef Id="yuicompressor.jar" />
+      <ComponentRef Id="LICENSE.txt" />
+      <ComponentRef Id="ClosureLicense.txt" />
+      <ComponentRef Id="YUILicense.txt" />
+      <ComponentRef Id="README.txt" />
+    </Feature>
+
+    <WixVariable Id="WixUILicenseRtf" Value="../LICENSE.rtf" />
+    <Property Id="ApplicationFolderName" Value="NetCompressor" />
+    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
+    <WixVariable Id="WixUIExclamationIco" Value="images/warning.ico" />
+    <WixVariable Id="WixUIInfoIco" Value="images/info.ico" />
+    <WixVariable Id="WixUINewIco" Value="images/newfolder.ico" />
+    <WixVariable Id="WixUIUpIco" Value="images/folderup.ico" />
+
+    <UIRef Id="WixUI_InstallDir" />
+
+  </Product>
+</Wix>

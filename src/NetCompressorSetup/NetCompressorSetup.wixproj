@@ -1,0 +1,72 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.0</ProductVersion>
+    <ProjectGuid>{b45a7477-a1ea-48f7-8ded-46384e6cda31}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>NetCompressorSetup</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.0\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.0\Wix.targets</WixTargetsPath>
+    <DefineSolutionProperties>false</DefineSolutionProperties>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug;ConfigurationName=Debug</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>..\..\bin\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <SuppressPdbOutput>True</SuppressPdbOutput>
+    <DefineConstants>ConfigurationName=Release</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="NetCompressor.wxs" />
+    <Compile Include="Product.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AddImport.xslt" />
+    <Content Include="Definitions.wxi" />
+    <None Include="images\folderup.ico" />
+    <None Include="images\info.ico" />
+    <None Include="images\newfolder.ico" />
+    <None Include="images\warning.ico" />
+    <None Include="SetVersion.bat" />
+    <None Include="SetVersion.vbs" />
+    <Content Include="Version.wxi" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NetCompressor\NetCompressor.vbproj">
+      <Name>NetCompressor</Name>
+      <Project>{f684d096-2152-4b8c-b5a9-cf0e3e33a4e9}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images" />
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+  <PropertyGroup>
+    <PreBuildEvent>"C:\Program Files (x86)\Windows Installer XML v3\bin\heat" file "$(ProjectDir)..\NetCompressor\bin\$(ConfigurationName)\NetCompressor.dll" -gg -srd -suid -out "$(ProjectDir)NetCompressor.wxs" -var var.SourceDir "-t:$(ProjectDir)AddImport.xslt"</PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?include Definitions.wxi?>
+<w:Wix xmlns:w="http://schemas.microsoft.com/wix/2006/wi">
+    <w:Fragment>
+        <w:DirectoryRef Id="INSTALLLOCATION">
+            <Component Id="NetCompressor.dll" Guid="{68F6379E-0D3A-4BAE-8B7F-7D6A4914ABA1}" xmlns="http://schemas.microsoft.com/wix/2006/wi">
+                <Class Id="{1D0FBB22-8E5A-4EC5-B4DA-97E4CE017B1B}" Context="InprocServer32" Description="NetCompressor.NetCompressorJS" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="NetCompressor.NetCompressorJS" Description="NetCompressor.NetCompressorJS" />
+                </Class>
+                <Class Id="{E5D686A7-BDA1-4C76-848D-553DAC4B579D}" Context="InprocServer32" Description="NetCompressor.NetCompressorCSS" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="NetCompressor.NetCompressorCSS" Description="NetCompressor.NetCompressorCSS" />
+                </Class>
+                <File Id="NetCompressor.dll" KeyPath="yes" Source="$(var.SourceDir)\NetCompressor.dll" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1D0FBB22-8E5A-4EC5-B4DA-97E4CE017B1B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1D0FBB22-8E5A-4EC5-B4DA-97E4CE017B1B}\InprocServer32\1.0.0.0" Name="Class" Value="NetCompressor.NetCompressorJS" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1D0FBB22-8E5A-4EC5-B4DA-97E4CE017B1B}\InprocServer32\1.0.0.0" Name="Assembly" Value="NetCompressor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=af44e09115a381ac" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1D0FBB22-8E5A-4EC5-B4DA-97E4CE017B1B}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1D0FBB22-8E5A-4EC5-B4DA-97E4CE017B1B}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#NetCompressor.dll]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1D0FBB22-8E5A-4EC5-B4DA-97E4CE017B1B}\InprocServer32" Name="Class" Value="NetCompressor.NetCompressorJS" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1D0FBB22-8E5A-4EC5-B4DA-97E4CE017B1B}\InprocServer32" Name="Assembly" Value="NetCompressor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=af44e09115a381ac" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1D0FBB22-8E5A-4EC5-B4DA-97E4CE017B1B}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{1D0FBB22-8E5A-4EC5-B4DA-97E4CE017B1B}\InprocServer32" Name="CodeBase" Value="file:///[#NetCompressor.dll]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E5D686A7-BDA1-4C76-848D-553DAC4B579D}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E5D686A7-BDA1-4C76-848D-553DAC4B579D}\InprocServer32\1.0.0.0" Name="Class" Value="NetCompressor.NetCompressorCSS" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E5D686A7-BDA1-4C76-848D-553DAC4B579D}\InprocServer32\1.0.0.0" Name="Assembly" Value="NetCompressor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=af44e09115a381ac" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E5D686A7-BDA1-4C76-848D-553DAC4B579D}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E5D686A7-BDA1-4C76-848D-553DAC4B579D}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#NetCompressor.dll]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E5D686A7-BDA1-4C76-848D-553DAC4B579D}\InprocServer32" Name="Class" Value="NetCompressor.NetCompressorCSS" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E5D686A7-BDA1-4C76-848D-553DAC4B579D}\InprocServer32" Name="Assembly" Value="NetCompressor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=af44e09115a381ac" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E5D686A7-BDA1-4C76-848D-553DAC4B579D}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E5D686A7-BDA1-4C76-848D-553DAC4B579D}\InprocServer32" Name="CodeBase" Value="file:///[#NetCompressor.dll]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Component Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Name="0" Value=".NET Category" Type="string" Action="write" />
+            </Component>
+        </w:DirectoryRef>
+    </w:Fragment>
+</w:Wix>
